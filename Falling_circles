@@ -1,0 +1,38 @@
+import pygame
+import random
+
+pygame.init()
+
+BLACK = [0,0,0]
+GREEN = [0,255,0]
+
+SIZE = [400,400]
+
+screen = pygame.display.set_mode(SIZE)
+pygame.display.set_caption("Animation")
+
+val = []
+
+for i in range(50):
+  x = random.randrange(0,400)
+  y = random.randrange(0,400)
+  val.append([x,y])
+clock = pygame.time.Clock()
+
+done = False
+while not done:
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      done = True
+  screen.fill(BLACK)
+  for i in range(len(val)):
+    pygame.draw.circle(screen,GREEN,val[i],4)
+    val[i][1] += 1
+    if val[i][1] > 400:
+      y = random.randrange(-50,-10)
+      val[i][1] = y
+      x = random.randrange(0,400)
+      val[i][0] = x
+  pygame.display.flip()
+  clock.tick(30)
+pygame.quit()
